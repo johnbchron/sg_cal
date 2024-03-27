@@ -1,0 +1,18 @@
+# 1. The user "main" can read and write any collection.
+[main]
+user: main
+collection: .*
+permissions: RWrw
+
+# 2. Authenticated users can read and write their own collections.
+[owner-write]
+user: .+
+# this is the user, then an optional (restricted) unix file path
+collection: {user}([a-zA-Z0-9\/_-]+)?$
+permissions: RWrw
+
+# 3. Main calendar is shared publicly
+[main-share]
+user: .*
+collection: main.+
+permissions: Rr

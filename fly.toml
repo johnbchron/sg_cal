@@ -1,0 +1,27 @@
+# fly.toml app configuration file generated for sg-cal on 2024-03-22T16:35:05+01:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'sg-cal'
+primary_region = 'ams'
+
+[build]
+
+[[mounts]]
+  source = 'sg_cal_data'
+  destination = '/data'
+  initial_size = '1gb'
+
+[http_service]
+  internal_port = 5232
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '256mb'
+  cpu_kind = 'shared'
+  cpus = 1
